@@ -82,7 +82,7 @@
                     
                     <div class="login-area">
                            <!-- 회원 프로필 이미지 -->
-                       <a href="<%= request.getContextPath() %>/member/myPage/profile">
+                       <a href="${contextPath}/member/myPage/profile">
                                
                                <c:if test="${empty loginUser.profileImage}">
                                    <img src="${contextPath}/resources/images/user.jpg" id="member-profile">
@@ -97,10 +97,10 @@
                            <!-- 회원 정보 + 로그아웃 버튼 -->                                       
                            <div class="my-info">
                                <div>
-<%--                                <a href="<%= request.getContextPath() %>/member/myPage/info" id="nickname">루피</a> --%>
+<%--                                <a href="${contextPath}/member/myPage/info" id="nickname">루피</a> --%>
                                    <a href="${contextPath}/member/myPage/info" id="nickname">${empty loginUser.nickName ? '루피':loginUser.nickName}</a>
 
-                                   <a href="<%= request.getContextPath() %>/member/logout" id="logout-btn">로그아웃</a>
+                                   <a href="${contextPath}/member/logout" id="logout-btn">로그아웃</a>
                                </div>
 
                                <p>
@@ -123,7 +123,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
    
     <!-- main.js 연결 -->
-    <script src="<%= request.getContextPath() %>/resources/js/main.js"></script>
+    <script src="${contextPath}/resources/js/main.js"></script>
 
 </body>
 </html>
