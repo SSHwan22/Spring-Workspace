@@ -2,8 +2,11 @@ package com.kh.spring.member.model.vo;
 
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 /*
  * lombok
  * - 자동 코드 생성 라이브러리
@@ -20,14 +23,17 @@ import lombok.Data;
  * - el표기법 사용시 내부적으로 getter메소드를 찾게되는데 이때 getuName(), getbTitle()이라는 이름으로 호출하기 때문.
  * 
  */
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-//@NoArgsConstructor //기본생성자
-//@AllArgsConstructor // 모든 필드를 매개변수로 갖는 생성자
+@AllArgsConstructor // 모든 필드를 매개변수로 갖는 생성자
 //@Setter // setter메서드 자동생성
 //@Getter // getter메서드 자동생성
 //@ToString // toString 자동생성
 //@EqualsAndHashCode // equals, hashcode 자동생성
 @Data
+@NoArgsConstructor //기본생성자
 @Builder
 public class Member {
 	private int userNo;
