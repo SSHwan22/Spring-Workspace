@@ -110,7 +110,7 @@ public class MemberController {
 	 * value : input태그의 name속성값으로 다른 속성을 작성하지 않은 경우 기본 값으로 활용된다.
 	 * 		   @RequestParam("url"), @RequestParam(value="url")
 	 * 
-	 * required : 입력된 name속성값이 필수적으로 파라미터에 포함되어야 하는지를 지정(required=false(기본값))
+	 * required : 입력된 name속성값이 필수적으로 파라미터에 포함되어야 하는지를 지정(required=true(기본값))
 	 *            required = true일 때 파라미터가 없으면 400에러를 반환(잘못된 요청(bad-request))
 	 *            required = false일 때 파라미터가 없으면 그냥 null값이 들어감
 	 *            

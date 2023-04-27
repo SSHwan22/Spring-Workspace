@@ -85,11 +85,11 @@
                        <a href="<%= request.getContextPath() %>/member/myPage/profile">
                                
                                <c:if test="${empty loginUser.profileImage}">
-                                   <img src="<%= request.getContextPath() %>/resources/images/user.jpg" id="member-profile">
+                                   <img src="${contextPath}/resources/images/user.jpg" id="member-profile">
                                </c:if>
 
                                <c:if test="${!empty loginUser.profileImage}">
-                                   <img src="<%= request.getContextPath() %>${loginUser.profileImage}" id="member-profile">
+                                   <img src="${contextPath}${loginUser.profileImage}" id="member-profile">
                                </c:if>
 
                        </a>
@@ -98,14 +98,14 @@
                            <div class="my-info">
                                <div>
 <%--                                <a href="<%= request.getContextPath() %>/member/myPage/info" id="nickname">루피</a> --%>
-                                   <a href="<%= request.getContextPath() %>/member/myPage/info" id="nickname">${empty loginUser.memberNickname ? '루피':loginUser.memberNickname}</a>
+                                   <a href="${contextPath}/member/myPage/info" id="nickname">${empty loginUser.nickName ? '루피':loginUser.nickName}</a>
 
                                    <a href="<%= request.getContextPath() %>/member/logout" id="logout-btn">로그아웃</a>
                                </div>
 
                                <p>
                                   <!-- alsrudals2022@naver.com -->
-                                   ${empty loginUser.memberEmail ? 'alsrudals93@naver.com':loginUser.memberEmail}
+                                   ${empty loginUser.userId ? 'alsrudals93@naver.com':loginUser.userId}
                                </p>
                            </div>
                     </div>
