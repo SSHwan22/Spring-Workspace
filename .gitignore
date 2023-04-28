@@ -26,3 +26,4 @@ replay_pid*
 .settings/
 Servers/
 target/
+.DS_Store
