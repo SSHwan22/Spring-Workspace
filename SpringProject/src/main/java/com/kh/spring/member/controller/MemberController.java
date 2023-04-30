@@ -55,7 +55,7 @@ public class MemberController {
 	 * 필드방식 의존성 주입 단점 	: 1) 순환 의존성 문제가 발생할 수 있다.
 	 * 						  2) 무분별한 주입시 의존관계 확인이 어렵다. 
 	 */
-	@Autowired // bean으로 등록된 객체 중 타입이 같거나, 상속관계인 bean을 자동으로 주입해주는 역할
+	//@Autowired // bean으로 등록된 객체 중 타입이 같거나, 상속관계인 bean을 자동으로 주입해주는 역할
 	private MemberService memberService;
 	
 	private BCryptPasswordEncoder bcryptPasswordEncoder;  
@@ -67,7 +67,7 @@ public class MemberController {
 	 * 		 2. 코드분석과 테스트에 유리하며, 객체주입시 가장 권장하는 방법.
 	 */
 	
-	// @Autowired 생성자가 하나뿐이라면 생략가능. 여러 개라면 반드시 Autowired 어노테이션을 추가해야 함
+	@Autowired //생성자가 하나뿐이라면 생략가능. 여러 개라면 반드시 Autowired 어노테이션을 추가해야 함
 	public MemberController(MemberService memberService, BCryptPasswordEncoder bcryptPasswordEncoder) {
 		this.memberService = memberService; 
 		this.bcryptPasswordEncoder = bcryptPasswordEncoder;
@@ -83,10 +83,10 @@ public class MemberController {
 	 * 
 	 */
 	
-	@Autowired
-	public void setMemberService(MemberService memberService) {
-		this.memberService = memberService;
-	}
+//	@Autowired
+//	public void setMemberService(MemberService memberService) {
+//		this.memberService = memberService;
+//	}
 
 	
 	
