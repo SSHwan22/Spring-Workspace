@@ -11,7 +11,7 @@
 		<result column="BOARD_NO" property="boardNo"/>
 		<result column="BOARD_TITLE" property="boardTitle"/>
 		<result column="BOARD_WRITER" property="boardWriter"/>
-		<result column="BOARD_NAME" property="nickName"/>
+		<result column="NICK_NAME" property="nickName"/>
 		<result column="COUNT" property="count"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="BOARD_CD" property="boardCd"/>
@@ -95,9 +95,11 @@
 	<select id="searchBoardListCount" resultType="_int">
 		<bind name="pattern" value="'%'+keyword+'%'"/>
 		SELECT COUNT(*)
-		WHERE STATUS = 'Y' AND 
+		FROM BOARD B
+		JOIN MEMBER M ON B.BOARD_WRITER = M.USER_NO
+		WHERE B.STATUS = 'Y' AND BOARD_CD = #{boardCode} AND
 		<if test="condition == 'writer'">
-			USER_NAME
+			NICK_NAME
 		</if>
 		<if test="condition == 'title'">
 			BOARD_TITLE
@@ -105,9 +107,36 @@
 		<if test="condition == 'content'">
 			BOARD_CONTENT
 		</if>
-		LIKE #{pattern}
 		<if test="condition == 'titleAndContent'">
-			
+			BOARD_TITLE LIKE #{pattern}
+			OR BOARD_CONTENT 		
 		</if>
+		LIKE #{pattern}
+	</select>
+	
+	<select id="searchBoardList" resultMap="boardDetailResultSet">
+		<bind name="pattern" value="'%'+keyword+'%'"/>
+     SELECT BOARD_NO, BOARD_TITLE, BOARD_WRITER, NICK_NAME, COUNT, B.CREATE_DATE,
+     (SELECT CHANGE_NAME 
+        FROM BOARD_IMG 
+        WHERE BOARD_NO = REF_BNO AND IMG_LEVEL = 0  ) THUMBNAIL
+     FROM BOARD B
+     JOIN MEMBER ON USER_NO = BOARD_WRITER
+     WHERE BOARD_CD = #{boardCode} AND B.STATUS = 'Y' AND
+	<if test="condition == 'writer'">
+		NICK_NAME
+	</if>
+	<if test="condition == 'title'">
+		BOARD_TITLE
+	</if>
+	<if test="condition == 'content'">
+		BOARD_CONTENT
+	</if>
+	<if test="condition == 'titleAndContent'">
+		BOARD_TITLE LIKE #{pattern}
+		OR BOARD_CONTENT 		
+	</if>
+	LIKE #{pattern}
+     ORDER BY B.CREATE_DATE DESC
 	</select>
 </mapper>

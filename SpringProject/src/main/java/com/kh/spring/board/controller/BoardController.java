@@ -59,7 +59,8 @@ public class BoardController {
 		}else {
 			// 검색요청을 한 경우
 			// 검색조건을 추가한 상태로 게시글 셀렉트?
-			boardService.searchBoardList(currentPage, boardCode, map, paramMap);
+			paramMap.put("boardCode", boardCode);
+			boardService.searchBoardList(currentPage, map, paramMap);
 		}
 		
 		

@@ -47,4 +47,14 @@ public class BoardDao {
 	public int searchBoardListCount(Map<String, Object> paramMap) {
 		return sqlSession.selectOne("boardMapper.searchBoardListCount",paramMap);
 	}
+	
+	public ArrayList<Board> searchBoardList(PageInfo pi, Map<String, Object> paramMap){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.searchBoardList", paramMap, rowBounds);
+	}
 }

@@ -16,5 +16,5 @@ public interface BoardService {
 	
 	public int updateReadCount(int boardNo);
 	
-	public void searchBoardList(int currentPage, String boardCode, Map<String, Object> map, Map<String, Object> paramMap);
+	public void searchBoardList(int currentPage, Map<String, Object> map, Map<String, Object> paramMap);
 }

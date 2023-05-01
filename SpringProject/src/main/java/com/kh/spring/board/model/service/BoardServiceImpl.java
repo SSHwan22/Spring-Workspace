@@ -57,13 +57,16 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void searchBoardList(int currentPage, String boardCode, Map<String, Object> map,
-			Map<String, Object> paramMap) {
-		paramMap.put("boardCode", boardCode);
+	public void searchBoardList(int currentPage, Map<String, Object> map,	Map<String, Object> paramMap) {
 		int listCount = boardDao.searchBoardListCount(paramMap);
 		int pageLimit = 10;
 		int boardLimit = 5;
 		PageInfo pi = pageination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		
+		ArrayList<Board> list = boardDao.searchBoardList(pi, paramMap);
+		
+		map.put("pi", pi);
+		map.put("list", list);
 	}
 
 
