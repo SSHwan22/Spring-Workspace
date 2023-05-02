@@ -15,8 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.board.model.service.BoardService;
 import com.kh.spring.board.model.vo.Board;
@@ -59,8 +61,9 @@ public class BoardController {
 		}else {
 			// 검색요청을 한 경우
 			// 검색조건을 추가한 상태로 게시글 셀렉트?
+			paramMap.put("currentPage", currentPage);
 			paramMap.put("boardCode", boardCode);
-			boardService.searchBoardList(currentPage, map, paramMap);
+			boardService.selectBoardList(paramMap, map);
 		}
 		
 		
@@ -140,4 +143,75 @@ public class BoardController {
 		return "board/boardDetailView";
 	}
 	
+	
+	@GetMapping("/enrollForm/{boardCode}")
+	public String boardEnrollForm(
+			@PathVariable("boardCode") String boardCode,
+			Model model,
+			@RequestParam(value="mode", defaultValue="insert", required = false) String mode,
+			@RequestParam(value="bno", defaultValue="0", required = false) int bno
+			) {
+		
+		if(mode.equals("update")) {
+			// 수정하기 페이지 요청
+			// 선택한 게시판 정보 조회 후 이동.
+			Board b = boardService.selectBoardDetail(bno);
+			
+			model.addAttribute("b",b);
+		}
+		if(boardCode.equals("N")) {
+			return "board/boardEnrollForm";
+		}else {
+			return "board/boardPictureEnrollForm";
+		}
+	}
+	
+	@PostMapping("/insert/{boardCode}")
+	public String insertBoard(
+			Board b,
+			@RequestParam(value="mode", required=false, defaultValue = "insert") String mode,
+			@RequestParam(value="images", required = false ) List<MultipartFile> imgList, //업로드용이미지파일
+			@RequestParam(value="upfile", required = false) MultipartFile upfile, // 첨부파일
+			@PathVariable("boardCode") String boardCode,
+			HttpSession session,
+			Model model,
+			
+			@RequestParam(value="deleteList", required = false) String deleteList)  {
+		
+		// 사진게시파을 이미지를 저정할 저장경로 얻어오기
+		String webPath = "/resources/images/boardT/";
+		String serverFolderPath = session.getServletContext().getRealPath(webPath);
+		b.setBoardCd(boardCode);
+		
+		int result = 0;
+		
+		if(mode.equals("insert")) {
+			
+			// db에 Board테이블에 데이터 추가
+			try {
+				result = boardService.insertBoard(b, imgList, webPath, serverFolderPath);
+			}catch(Exception e){
+				e.printStackTrace();
+				System.out.println("에러 발생");
+			}
+		}else {
+			// 게시글 수정 서비스 호출
+			// b객체 안에 boardNo이 들어간 상태일 것.
+			try {
+			result = boardService.updateBoard(b, imgList, webPath, serverFolderPath, deleteList);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		if(result>0) { // 성공적으로 추가시
+			session.setAttribute("alertMsg", "게시글 작성에 성공하셨습니다.");
+			return "redirect:../list/"+boardCode;
+		}else { // errorPage 포워딩
+			model.addAttribute("errorMsg", "게시글 작성 실패");
+			return "common/errorPage";
+		}
+	}
 }

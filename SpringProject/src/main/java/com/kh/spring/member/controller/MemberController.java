@@ -256,6 +256,7 @@ public class MemberController {
 //			mv.addObject("loginUser", loginUser); // MV로 추가 시 에러 발생
 //			session.setAttribute("loginUser", loginUser);
 			model.addAttribute("loginUser", loginUser);
+			
 			session.setAttribute("alertMsg", "로그인 성공");
 			
 			
