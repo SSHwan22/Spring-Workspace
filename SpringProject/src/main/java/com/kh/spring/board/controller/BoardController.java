@@ -198,13 +198,13 @@ public class BoardController {
 			// 게시글 수정 서비스 호출
 			// b객체 안에 boardNo이 들어간 상태일 것.
 			try {
-			result = boardService.updateBoard(b, imgList, webPath, serverFolderPath, deleteList);
+				result = boardService.updateBoard(b, imgList, webPath, serverFolderPath, deleteList);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
 		}
-		
+		// 첨부파일 업로드 -> Board 테이블 안에 ORIGIN_NAME, CHANGE_NAME
 		
 		if(result>0) { // 성공적으로 추가시
 			session.setAttribute("alertMsg", "게시글 작성에 성공하셨습니다.");

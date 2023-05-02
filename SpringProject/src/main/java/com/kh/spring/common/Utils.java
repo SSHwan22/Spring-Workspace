@@ -11,7 +11,7 @@ public class Utils {
 
 	
 	//변경된 이름을 돌려주면서, 원본파일을 변경된 파일이름으로 서버에 저장시키는 메소드
-	public static String saveFile(MultipartFile upfile, String savePath) {
+	public static String saveFile(MultipartFile upfile, String savePath) throws IllegalStateException, IOException{
 		
 		String originName = upfile.getOriginalFilename(); // "user.jpg"
 		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -22,16 +22,8 @@ public class Utils {
 		
 		String changeName = currentTime+random+ext;
 		
-		try {
-			upfile.transferTo(new File(savePath+changeName));
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		upfile.transferTo(new File(savePath+changeName));
+
 		return changeName;
 	}
 }

@@ -17,7 +17,7 @@ public class Board {
 	private String boardCd;
 	
 	
-	private String orginName;
+	private String originName;
 	private String changeName;
 	private String nickName;
 	

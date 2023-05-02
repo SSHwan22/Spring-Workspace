@@ -117,16 +117,17 @@ public class BoardServiceImpl implements BoardService{
 					//변경된 파일명 renameList에 저장할 예정.
 					String changeName = Utils.saveFile(list.get(i), serverFolderPath);
 					renameList.add(changeName);
-					
 					// BoardImg객체를 생성해서 필드에 값을 세팅한 후 boardImageList에 추가할 예정
 					BoardImg img = new BoardImg();
 					img.setRefBno(boardNo); // 등록한 게시글 번호
 					img.setImgLevel(i); // 이미지 순서
 					img.setOriginName(list.get(i).getOriginalFilename()); // 원본파일명
+					img.setChangeName(changeName);
 					
 					boardImageList.add(img);
 				}
 			}
+			System.out.println(boardImageList);
 			
 			// 분류작업 완료 후 boardImageList가	비어있는가 ? 	등록한 이미지가 없음
 			//								비어있지 않다?	등록한 이미지가 있음
@@ -169,6 +170,7 @@ public class BoardServiceImpl implements BoardService{
 						img.setRefBno(b.getBoardNo()); // 등록한 게시글 번호
 						img.setImgLevel(i); // 이미지 순서
 						img.setOriginName(list.get(i).getOriginalFilename()); // 원본파일명
+						img.setChangeName(changeName);
 						
 						boardImgList.add(img);
 					}
@@ -180,11 +182,12 @@ public class BoardServiceImpl implements BoardService{
 					Map<String, Object> map = new HashMap();
 					map.put("boardNo", b.getBoardNo());
 					map.put("deleteList", deleteList);
+					System.out.println(map);
 					
 					result = boardDao.deleteBoardImage(map);
 				}
 				
-				// 5) db에서 삭제에 성공했따면
+				// 5) db에서 삭제에 성공했다면
 				if(result>0) {
 					
 					//boardImg객체 하나하나 업데이트

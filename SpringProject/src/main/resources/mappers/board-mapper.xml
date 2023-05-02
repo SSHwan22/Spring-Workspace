@@ -51,7 +51,7 @@
 		<result column="ORIGIN_NAME" property="originName"/>
 		<result column="CHANGE_NAME" property="changeName"/>
 		<result column="REF_BNO" property="refBno"/>
-		<result column="imgLevel" property="IMG_LEVEL"/>
+		<result column="IMG_LEVEL" property="imgLevel"/>
 	</resultMap>
 	
 	<select id="selectImgList" resultMap="boardImgResultSet">
