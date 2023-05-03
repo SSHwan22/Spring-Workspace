@@ -94,7 +94,7 @@ public class BoardServiceImpl implements BoardService{
 	 * rollbackFor : rollack을 수행하기 위한 예외의 종류를 작성하는 부분
 	 */
 	
-	@Transactional(rollbackFor = {Exception.class}) // 모든 종루의 예외가 발생하면 rollback 시키겠다라고 선언
+	@Transactional(rollbackFor = {Exception.class}) // 모든 종류의 예외가 발생하면 rollback 시키겠다라고 선언
 	public int insertBoard(Board b, List<MultipartFile> list, String webPath, String serverFolderPath) throws Exception {
 		
 		// 1) 게시글 등록
