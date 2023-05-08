@@ -21,4 +21,6 @@ public interface MemberService {
 	public int insertMember(Member inputMember);
 	
 	public ArrayList<Member> selectAll();
+	
+	public void updateMemberChangePwd();
 }
