@@ -8,6 +8,7 @@
 		<result column="REPLY_CONTENT"  property="replyContent"/>
 		<result column="REF_BNO"  property="refBno"/>
 		<result column="REPLY_WRITER"  property="replyWriter"/>
+		<result column="USER_NO" property="userNo"/>
 		<result column="CREATE_DATE"  property="createDate"/>
 		<result column="STATUS"  property="status"/>
 	</resultMap>
@@ -21,10 +22,32 @@
 	
 	<!-- 댓글 조회 -->
 	<select id="selectReplyList" resultMap="replyResultSet">
-		SELECT REPLY_NO, REPLY_CONTENT, REF_BNO, NICK_NAME AS REPLY_WRITER, R.CREATE_DATE, R.STATUS
+		SELECT REPLY_NO, REPLY_CONTENT, REF_BNO, NICK_NAME AS REPLY_WRITER, R.CREATE_DATE, R.STATUS, USER_NO
 		FROM REPLY R
 		JOIN MEMBER M ON R.REPLY_WRITER = M.USER_NO
 		WHERE REF_BNO = #{bno} AND R.STATUS = 'Y' 
 		ORDER BY CREATE_DATE DESC
+		<!-- 대댓글할 경우 -->
+<!-- 		SELECT * -->
+<!-- 		FROM REPLY R -->
+<!-- 		JOIN MEMBER M ON R.REPLY_WRITER = M.USER_NO -->
+<!-- 		WHERE REF_BNO = 4 AND R.STATUS = 'Y'  -->
+<!-- 		START WITH PARENT_REPLY_NO IS NULL -->
+<!-- 		CONNECT BY PRIOR REPLY_NO = PARENT_REPLY_NO -->
+<!-- 		ORDER SIBLINGS BY REPLY_NO -->
 	</select>
+	
+	<!-- 댓글 삭제 -->
+	<update id="deleteReply" parameterType="_int">
+		UPDATE REPLY 
+		SET STATUS = 'N' 
+		WHERE REPLY_NO = #{replyNo}  
+	</update>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateReply" parameterType="reply">
+		UPDATE REPLY
+		SET REPLY_CONTENT = #{replyContent}
+		WHERE REPLY_NO = #{replyNo}
+	</update>
 </mapper>
