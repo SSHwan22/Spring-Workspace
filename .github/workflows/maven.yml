@@ -36,7 +36,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file SpringProject/pom.xml
     - name: target
-      run: ls -al ./SpringPro
+      run: ls -al ./SpringProject
+      
     # Runner Public IP   
     - name: Public IP
       id: ip
