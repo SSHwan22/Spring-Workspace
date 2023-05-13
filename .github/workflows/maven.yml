@@ -52,7 +52,7 @@ jobs:
         key: ${{ secrets.REMOTE_SSH_KEY }}
         port: ${{ secrets.REMOTE_SSH_PORT }}
         source: "./SpringProject/target/spring-1.0.0-BUILD-SNAPSHOT.war"
-        target: "/usr/local/lib/apache-tomcat-9.0.71/webapps"
+        target: "/usr/local/lib/apache-tomcat-9.0.71/webapps/"
     
     # ec2 스크립트 실행
     - name: ssh_script
