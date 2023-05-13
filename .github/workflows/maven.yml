@@ -52,7 +52,7 @@ jobs:
         key: ${{ secrets.REMOTE_SSH_KEY }}
         port: ${{ secrets.REMOTE_SSH_PORT }}
         source: "./SpringProject/target/spring-1.0.0-BUILD-SNAPSHOT.war"
-        target: "REMOTE_SCP_WAR"
+        target: "/usr/local/lib/apache-tomcat-9.0.71/ROOT.war"
     
     # ec2 스크립트 실행
     - name: ssh_script
@@ -63,6 +63,6 @@ jobs:
         key: ${{ secrets.REMOTE_SSH_KEY }}
         port: ${{ secrets.REMOTE_SSH_PORT }}
         script: |
-          sh ${{REMOTE_SSH_TOCAT_PATH}}/bin/deploy.sh
+          sh /usr/local/lib/apache-tomcat-9.0.71/bin/deploy.sh
           echo 'end'
       
