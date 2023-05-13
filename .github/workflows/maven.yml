@@ -63,6 +63,6 @@ jobs:
         key: ${{ secrets.REMOTE_SSH_KEY }}
         port: ${{ secrets.REMOTE_SSH_PORT }}
         script: |
-          sh ${{REMOTE_SSH_TOCAT_PATH}}/bin/deploy.sh
+          sh ${REMOTE_SSH_TOCAT_PATH}}/bin/deploy.sh
           echo 'end'
       
