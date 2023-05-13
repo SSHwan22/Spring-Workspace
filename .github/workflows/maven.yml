@@ -31,8 +31,14 @@ jobs:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
+        
+    # maven 빌드
     - name: Build with Maven
       run: mvn -B package --file SpringProject/pom.xml
+      
+    # Runner Public IP   
     - name: Public IP
       id: ip
       uses: haythem/public-ip@v1.2
+      
+    
