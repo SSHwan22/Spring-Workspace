@@ -16,6 +16,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "./SpringProject"
 
     steps:
     - uses: actions/checkout@v3
@@ -25,8 +28,8 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name : Change Directory
-      run : cd ./SpringProject
+    - name : info Current Directory
+      run : ls -al ./
     - name: Build with Maven
       run: mvn -B package --file SpringProject/pom.xml
 
