@@ -52,4 +52,17 @@ jobs:
         key: ${{ secrets.REMOTE_SSH_KEY }}
         port: ${{ secrets.REMOTE_SSH_PORT }}
         source: "./SpringProject/target/spring-1.0.0-BUILD-SNAPSHOT.war"
-        target: "/opt/git/SpringProject/"
+        target: "REMOTE_SCP_WAR"
+    
+    # ec2 스크립트 실행
+    - name: ssh_script
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.REMOTE_IP }}
+        username: ${{ secrets.REMOTE_SSH_ID }}
+        key: ${{ secrets.REMOTE_SSH_KEY }}
+        port: ${{ secrets.REMOTE_SSH_PORT }}
+        script: |
+          sh ${{REMOTE_SSH_TOCAT_PATH}}/bin/deploy.sh
+          echo 'end'
+      
