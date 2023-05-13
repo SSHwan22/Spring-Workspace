@@ -27,8 +27,8 @@ jobs:
         cache: maven
     - name : Check pwd
       run : pwd
-    - name : info ls 
-      run : ls -al ./
+    - name : info env 
+      run : env
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
