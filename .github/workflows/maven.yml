@@ -53,7 +53,7 @@ jobs:
         port: ${{ secrets.REMOTE_SSH_PORT }}
         source: "./SpringProject/target/*.war"
         target: "/usr/local/lib/apache-tomcat-9.0.71/webapps/"
-        strip_components: 3
+        strip_components: 2
     
     # ec2 스크립트 실행
     - name: ssh_script
