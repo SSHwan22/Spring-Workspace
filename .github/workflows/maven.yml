@@ -1,0 +1,69 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+        
+    # maven 빌드
+    - name: Build with Maven
+      run: mvn -B package --file SpringProject/pom.xml
+    - name: target
+      run: ls -al ./SpringProject
+      
+    # Runner Public IP   
+    - name: Public IP
+      id: ip
+      uses: haythem/public-ip@v1.2
+      
+    # ec2로 war 파일 전송
+    - name: scp
+      uses:  appleboy/scp-action@master
+      with:
+        host: ${{ secrets.REMOTE_IP }}
+        username: ${{ secrets.REMOTE_SSH_ID }}
+        key: ${{ secrets.REMOTE_SSH_KEY }}
+        port: ${{ secrets.REMOTE_SSH_PORT }}
+        source: "./SpringProject/target/*.war"
+        target: "/usr/local/lib/apache-tomcat-9.0.71/webapps/"
+        strip_components: 2
+    
+    # ec2 스크립트 실행
+    - name: ssh_script
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.REMOTE_IP }}
+        username: ${{ secrets.REMOTE_SSH_ID }}
+        key: ${{ secrets.REMOTE_SSH_KEY }}
+        port: ${{ secrets.REMOTE_SSH_PORT }}
+        script: |
+          sh /usr/local/lib/apache-tomcat-9.0.71/bin/deploy.sh
+          echo 'end'
+      
