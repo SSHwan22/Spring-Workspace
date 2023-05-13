@@ -16,9 +16,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: "./SpringProject"
+#     defaults:
+#       run:
+#         working-directory: "./SpringProject"
 
     steps:
     - uses: actions/checkout@v3
@@ -29,9 +29,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name : info Current Directory
-      run : ls -al ./
-    - name: Build with Maven
-      run: mvn -B package --file SpringProject/pom.xml
+      run : pwd
+#     - name: Build with Maven
+#       run: mvn -B package --file SpringProject/pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
