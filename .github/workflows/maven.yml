@@ -25,6 +25,10 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name : Check pwd
+      run : pwd
+    - name : info ls 
+      run : ls -al ./
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
