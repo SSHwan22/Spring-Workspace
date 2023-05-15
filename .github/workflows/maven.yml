@@ -31,6 +31,9 @@ jobs:
 #       run: mvn -B package --file SpringProject/pom.xml
       run: mvn -B package --file SpringProject/pom.xml -DfinalName=ROOT
       
+    - name: target
+      run: ls -al ./SpringProject/target
+      
     # ec2로 war 파일 전송
     - name: scp war
       uses:  appleboy/scp-action@master
