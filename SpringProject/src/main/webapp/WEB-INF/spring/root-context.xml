@@ -19,7 +19,7 @@
 	<bean class="org.apache.commons.dbcp.BasicDataSource" id="realDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 <!-- 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/> -->
-		<property name="url" value="jdbc:oracle:thin:@54.180.109.76:1521:xe"/>
+		<property name="url" value="jdbc:oracle:thin:@43.200.180.206:1521:xe"/>
 
 		<property name="username" value="SPRING"/>
 		<property name="password" value="SPRING"/>
