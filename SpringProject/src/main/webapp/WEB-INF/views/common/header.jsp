@@ -127,8 +127,8 @@ div {box-sizing:border-box;}
 	    	<li><a href="#">공지사항!!!!!!!!!</a></li>
 	    	<li><a href="${contextPath}/chat/chatRoomList">채팅</a></li>
 	       <%--  <li><a href="${contextPath}/board/list?type=1">공지사항</a></li>
-	        <li><a href="${contextPath}/board/list?type=2">자유 게시판</a></li>
-	        <li><a href="${contextPath}/board/list?type=3">질문 게시판</a></li> --%>	
+	        <li><a href="${contextPath}/board/list?type=2">자유 게시판!</a></li>
+	        <li><a href="${contextPath}/board/list?type=3">질문 게시판!</a></li> --%>	
 			<c:forEach var="boardType" items="${boardTypeList}">
 				<li><a href="${contextPath}/board/list/${boardType.boardCd}">${boardType.boardName}</a></li>
 			</c:forEach>
