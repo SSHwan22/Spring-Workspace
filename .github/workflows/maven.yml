@@ -28,7 +28,8 @@ jobs:
         
     # maven 빌드
     - name: Build with Maven
-      run: mvn -B package --file SpringProject/pom.xml
+#       run: mvn -B package --file SpringProject/pom.xml
+      run: mvn -B package --file SpringProject/pom.xml -DfinalName=ROOT
       
     # ec2로 war 파일 전송
     - name: scp war
