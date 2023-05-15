@@ -29,7 +29,7 @@ jobs:
     # maven 빌드
     - name: Build with Maven
 #       run: mvn -B package --file SpringProject/pom.xml
-      run: mvn -B package -DfinalName=ROOT --file SpringProject/pom.xml 
+      run: mvn -B package --file SpringProject/pom.xml 
       
     - name: target
       run: ls -al ./SpringProject/target
