@@ -14,6 +14,9 @@
 <!-- 부투스트랩에서 제공하고있는 스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<!-- 네이버 로그인 -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+
 <!-- alertify -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <!-- alertify css -->
@@ -152,7 +155,18 @@ div {box-sizing:border-box;}
 					<div class="modal-body">
 						<input type="text" class="form-controll mb-2 mr-sm-2" placeholder="Enter ID" id="userId" name="userId" value="${cookie.saveId.value}" style="width:100%"> <br>
 						<input type="password" class="form-controll mb-2 mr-sm-2" placeholder="Enter Password" id="userPwd" name="userPwd" style="width:100%">
+						    <div id="naver_id_login"></div>
+						
 					</div>
+				    <script type="text/javascript">
+				        var naver_id_login = new naver_id_login("ioJQ7789PB_x4igIXcRS", "http://localhost/member/naverLogin");
+				        var state = naver_id_login.getUniqState();
+				        naver_id_login.setButton("white", 2,40);
+				        naver_id_login.setDomain("http://localhost");
+				        naver_id_login.setState(state);
+				        naver_id_login.setPopup();
+				        naver_id_login.init_naver_id_login();
+				    </script>
 					
 					<!-- 모달 푸터 -->
 					<div class="modal-footer">

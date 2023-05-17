@@ -422,6 +422,17 @@ public class MemberController extends QuartzJobBean{
 		System.out.println("콰츠 테스트");
 	}
 	
+	//네이버 로그인
+	@GetMapping("/naverCallback")
+	public String naverCallback() {
+		
+		return "/member/naverCallback";
+	}
+	@GetMapping("/naverLogin")
+	public String naverLogin() {
+		return "/member/naverLogin";
+	}
+	
 	/*
 	 * 회원정보 확인 스케쥴러
 	 * 매일 오전 1시에 모든 사용자의 정보를 검색하여 사용자가 비밀번호를 안 바꾼지 3개월이 지났다면,
