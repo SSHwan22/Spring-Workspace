@@ -10,6 +10,23 @@
 		서버 구동과 동시에 web.xml파일을 거쳐서 곧바로 로딩되는 문서
 		- 보통 서버구동과 동시에 세팅해야하는 내용들을 작성함(db연결, 트랜잭션처리) 
 	-->
+    <bean id="encryptorConfig" class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
+        <property name="algorithm" value="PBEWithMD5AndDES" />
+        <property name="password" value="finalProject_thrifty" />
+    </bean>
+    
+    <bean id="encryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+        <property name="config" ref="encryptorConfig"></property>
+    </bean>
+
+    <bean id="propertyConfigurer" class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+        <constructor-arg ref="encryptor" />
+            <property name="locations">
+                <list>
+                    <value>classpath:/application.properties</value>
+                </list>
+            </property>
+    </bean>
 	
 	<!-- DB연결 설정(3단계) -->
 	<!-- 1단계 DB연결을 위한 도구 설정 
@@ -20,9 +37,10 @@
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 <!-- 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/> -->
 		<property name="url" value="jdbc:oracle:thin:@43.200.180.206:1521:xe"/>
-
-		<property name="username" value="SPRING"/>
-		<property name="password" value="SPRING"/>
+<!-- 		<property name="username" value="SPRING"/> -->
+<!-- 		<property name="password" value="SPRING"/> -->
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
 		
 		<!-- SQL이 수행된 후 자동으로 COMMIT 되는 것을 지정 -->
 		<property name="defaultAutoCommit" value="false"/>

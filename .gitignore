@@ -30,3 +30,5 @@ replay_pid*
 Servers/
 target/
 .DS_Store
+SpringProject/src/main/java/com/kh/spring/common/template/JasyptTest.java
+SpringProject/src/main/resources/application.properties
