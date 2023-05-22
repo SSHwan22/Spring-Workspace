@@ -126,7 +126,7 @@ div {box-sizing:border-box;}
 	</div>
 	<div class="nav">
 	    <ul>
-	    	<li><a href="#">HOME</a></li>
+	    	<li><a href="#">HOME_TEST</a></li>
 	    	<li><a href="#">공지사항</a></li>
 	    	<li><a href="${contextPath}/chat/chatRoomList">채팅</a></li>
 	       <%--  <li><a href="${contextPath}/board/list?type=1">공지사항</a></li>
